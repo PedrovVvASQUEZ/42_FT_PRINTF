@@ -1,38 +1,38 @@
 # ft_printf
 
-Recréation simplifiée de la fonction `printf` de la bibliothèque standard C. Ce projet de l’école 42 apprend à traiter une chaîne de format, à récupérer des arguments variadiques et à afficher des valeurs avec `write`.
+A simplified reimplementation of the C standard library's `printf` function. This 42 school project explores parsing a format string, retrieving variadic arguments, and printing values with `write`.
 
-## Fonctionnalités
+## Features
 
-La fonction `ft_printf` écrit sur la sortie standard et renvoie le nombre de caractères affichés. Les conversions prises en charge sont :
+`ft_printf` writes to standard output and returns the number of characters printed. The following conversions are supported:
 
-| Conversion | Valeur affichée |
+| Conversion | Output |
 | --- | --- |
-| `%c` | Un caractère |
-| `%s` | Une chaîne de caractères (`(null)` si le pointeur vaut `NULL`) |
-| `%p` | Une adresse en hexadécimal, préfixée par `0x` (`(nil)` si elle est nulle) |
-| `%d`, `%i` | Un entier décimal signé |
-| `%u` | Un entier décimal non signé |
-| `%x` | Un entier en hexadécimal minuscule |
-| `%X` | Un entier en hexadécimal majuscule |
-| `%%` | Le caractère `%` |
+| `%c` | A character |
+| `%s` | A string (`(null)` if the pointer is `NULL`) |
+| `%p` | A hexadecimal address prefixed with `0x` (`(nil)` for a null pointer) |
+| `%d`, `%i` | A signed decimal integer |
+| `%u` | An unsigned decimal integer |
+| `%x` | A lowercase hexadecimal integer |
+| `%X` | An uppercase hexadecimal integer |
+| `%%` | The `%` character |
 
-Les indicateurs de formatage, la largeur de champ et la précision ne sont pas implémentés. Pour un spécificateur autre que ceux listés ci-dessus, son caractère est écrit tel quel.
+Format flags, field width, and precision are not implemented. For an unsupported conversion specifier, the specifier character is printed as-is.
 
-## Compilation
+## Build
 
-Depuis le dossier du projet :
+From the project directory:
 
 ```sh
 cd ft_printf
 make
 ```
 
-La compilation produit la bibliothèque statique `libftprintf.a`. Les commandes Makefile disponibles sont `make`, `make clean`, `make fclean` et `make re`. La compilation utilise `gcc` avec `-Wall -Wextra -Werror`.
+This builds the static library `libftprintf.a`. Available Makefile targets are `make`, `make clean`, `make fclean`, and `make re`. The project is compiled with `gcc` using `-Wall -Wextra -Werror`.
 
-## Utilisation
+## Usage
 
-Inclure l’en-tête puis lier la bibliothèque lors de la compilation de votre programme :
+Include the header and link the library when compiling your program:
 
 ```c
 #include "ft_printf.h"
@@ -41,23 +41,23 @@ int main(void)
 {
 	int count;
 
-	count = ft_printf("Bonjour %s, score : %d%%\n", "42", 100);
+	count = ft_printf("Hello %s, score: %d%%\n", "42", 100);
 	return (count < 0);
 }
 ```
 
-Depuis la racine du dépôt, en supposant que le fichier s’appelle `main.c` :
+From the repository root, assuming your source file is named `main.c`:
 
 ```sh
 gcc -Wall -Wextra -Werror -Ift_printf main.c ft_printf/libftprintf.a -o demo
 ./demo
 ```
 
-## Organisation du projet
+## Project structure
 
-- `ft_printf/ft_printf.c` — parcours de la chaîne de format, lecture des arguments variadiques et dispatch des conversions.
-- `ft_printf/ft_utils.c` — affichage des caractères, chaînes et nombres signés dans une base donnée.
-- `ft_printf/ft_putunbr.c` — conversion et affichage des entiers non signés.
-- `ft_printf/ft_putptr.c` — affichage des pointeurs en hexadécimal.
-- `ft_printf/ft_printf.h` — déclarations des fonctions et inclusions nécessaires.
-- `ft_printf/Makefile` — compilation de la bibliothèque statique.
+- `ft_printf/ft_printf.c` — parses the format string, reads variadic arguments, and dispatches conversions.
+- `ft_printf/ft_utils.c` — prints characters, strings, and signed numbers in a given base.
+- `ft_printf/ft_putunbr.c` — converts and prints unsigned integers.
+- `ft_printf/ft_putptr.c` — prints pointers in hexadecimal.
+- `ft_printf/ft_printf.h` — function declarations and required includes.
+- `ft_printf/Makefile` — builds the static library.
